@@ -14,4 +14,4 @@ requires:
   DBIx::Class::QueryLog: 0
 resources:
   repository: http://github.com/fayland/catalyst-traitfor-model-dbic-schema-querylog/tree
-version: 0.01
+version: 0.02

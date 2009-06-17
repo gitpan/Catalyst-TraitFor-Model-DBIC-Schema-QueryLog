@@ -1,5 +1,5 @@
 package Catalyst::TraitFor::Model::DBIC::Schema::QueryLog;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # ABSTRACT: L<DBIx::Class::QueryLog> support for L<Catalyst::Model::DBIC::Schema>
 
@@ -52,11 +52,11 @@ Catalyst::TraitFor::Model::DBIC::Schema::QueryLog - L<DBIx::Class::QueryLog> sup
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
-    use base qw/DBIx::Class::Schema/;
+    use base qw/Catalyst::Model::DBIC::Schema/;
 
     __PACKAGE__->config({
         traits => ['QueryLog']

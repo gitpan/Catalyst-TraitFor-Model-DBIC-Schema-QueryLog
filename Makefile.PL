@@ -9,7 +9,7 @@ WriteMakefile(
   NAME      => 'Catalyst::TraitFor::Model::DBIC::Schema::QueryLog',
   AUTHOR    => 'Fayland\ Lam\ \<fayland\@gmail\.com\>',
   ABSTRACT  => 'L\<DBIx\:\:Class\:\:QueryLog\>\ support\ for\ L\<Catalyst\:\:Model\:\:DBIC\:\:Schema\>',
-  VERSION   => '0.01',
+  VERSION   => '0.02',
   EXE_FILES => [ qw() ],
   (eval { ExtUtils::MakeMaker->VERSION(6.21) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {

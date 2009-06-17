@@ -3,10 +3,10 @@ NAME
     DBIx::Class::QueryLog support for Catalyst::Model::DBIC::Schema
 
 VERSION
-    version 0.01
+    version 0.02
 
 SYNOPSIS
-        use base qw/DBIx::Class::Schema/;
+        use base qw/Catalyst::Model::DBIC::Schema/;
 
         __PACKAGE__->config({
             traits => ['QueryLog']
