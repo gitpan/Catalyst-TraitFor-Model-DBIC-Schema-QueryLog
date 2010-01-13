@@ -1,5 +1,5 @@
 package Catalyst::TraitFor::Model::DBIC::Schema::QueryLog;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 # ABSTRACT: L<DBIx::Class::QueryLog> support for L<Catalyst::Model::DBIC::Schema>
 
@@ -14,6 +14,11 @@ with 'Catalyst::Component::InstancePerContext';
 has 'querylog' => (
     is  => 'rw',
     isa => 'DBIx::Class::QueryLog',
+);
+has 'querylog_args' => (
+    is      => 'rw',
+    isa     => 'HashRef',
+    default => sub { {} },
 );
 has 'querylog_analyzer' => (
     is         => 'rw',
@@ -33,7 +38,8 @@ sub build_per_context_instance {
 
     my $schema = $self->schema;
 
-    my $querylog = DBIx::Class::QueryLog->new();
+    my $querylog_args = $self->querylog_args;
+    my $querylog      = DBIx::Class::QueryLog->new($querylog_args);
     $self->querylog($querylog);
     $self->clear_querylog_analyzer;
 
@@ -46,22 +52,34 @@ sub build_per_context_instance {
 1;
 __END__
 
+=pod
+
 =head1 NAME
 
 Catalyst::TraitFor::Model::DBIC::Schema::QueryLog - L<DBIx::Class::QueryLog> support for L<Catalyst::Model::DBIC::Schema>
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
     use base qw/Catalyst::Model::DBIC::Schema/;
-
+    
     __PACKAGE__->config({
-        traits => ['QueryLog']
+        traits => ['QueryLog'],
         connect_info => 
             ['dbi:mysql:master', 'user', 'pass'],
+    });
+
+    # or
+    __PACKAGE__->config({
+        traits => ['QueryLog'],
+        connect_info => 
+            ['dbi:mysql:master', 'user', 'pass'],
+        querylog_args => {
+            passthrough => 1,
+        },
     });
 
 =head1 DESCRIPTION
@@ -81,6 +99,10 @@ an instance of L<DBIx::Class::QueryLog>.
 =item querylog_analyzer
 
 an instance of L<DBIx::Class::QueryLog::Analyzer>.
+
+=item querylog_args
+
+passed to DBIx::Class::QueryLog->new;
 
 =back
 
@@ -159,9 +181,9 @@ L<Catalyst::Component::InstancePerContext>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Fayland Lam.
+This software is copyright (c) 2010 by Fayland Lam.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as perl itself.
 
-=pod 
+=cut

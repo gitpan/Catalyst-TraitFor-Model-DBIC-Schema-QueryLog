@@ -3,15 +3,25 @@ NAME
     DBIx::Class::QueryLog support for Catalyst::Model::DBIC::Schema
 
 VERSION
-    version 0.02
+    version 0.03
 
 SYNOPSIS
         use base qw/Catalyst::Model::DBIC::Schema/;
-
+    
         __PACKAGE__->config({
-            traits => ['QueryLog']
+            traits => ['QueryLog'],
             connect_info => 
                 ['dbi:mysql:master', 'user', 'pass'],
+        });
+
+        # or
+        __PACKAGE__->config({
+            traits => ['QueryLog'],
+            connect_info => 
+                ['dbi:mysql:master', 'user', 'pass'],
+            querylog_args => {
+                passthrough => 1,
+            },
         });
 
 DESCRIPTION
@@ -25,6 +35,9 @@ DESCRIPTION
 
     querylog_analyzer
         an instance of DBIx::Class::QueryLog::Analyzer.
+
+    querylog_args
+        passed to DBIx::Class::QueryLog->new;
 
   EXAMPLE CODE
       <div class="featurebox">
@@ -97,7 +110,7 @@ AUTHOR
       Fayland Lam <fayland@gmail.com>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2009 by Fayland Lam.
+    This software is copyright (c) 2010 by Fayland Lam.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as perl itself.
